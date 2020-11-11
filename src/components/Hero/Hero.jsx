@@ -1,6 +1,9 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import { breakAt, BreakpointSize } from "../Breakpoints";
+import PropTypes from "prop-types";
+
+const yellow = "#ffc107";
 const Root = styled.div`
   color: #fff;
   padding: 100px 0;
@@ -13,15 +16,32 @@ const Root = styled.div`
   `}
 `;
 
-const Title = styled.h1`
-  font-weight: 700;
-  letter-spacing: 2px;
-`;
+// const Title = styled.h1`
+//   position: relative;
+//   font-weight: 700;
+//   letter-spacing: 2px;
+//   margin-bottom: 25px;
+//   padding-bottom: 25px;
+//   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
+//   &::after {
+//     content: "";
+//     position: absolute;
+//     left: 0;
+//     bottom: -3px;
+//     background-color: ${yellow};
+//     height: 5px;
+//     width: 70px;
+//   }
+
+//   strong {
+//     color: ${yellow};
+//   }
+// `;
 
 const Container = styled.div`
   width: 100%;
   padding: 0 8px;
-  background-color: red;
 
   ${breakAt(BreakpointSize.sm)} {
     padding: 0 60px;
@@ -48,15 +68,27 @@ const Content = styled.div`
 
   li::before {
     content: "\\2713\\0020";
+    color: ${yellow};
   }
 `;
 const Hero = ({ image, title, children }) => (
   <Root image={image}>
     <Container>
-      <Title>{title}</Title>
       <Content>{children}</Content>
     </Container>
   </Root>
 );
 
+Hero.propTypes = {
+  /**
+   * Background image
+   */
+  image: PropTypes.string,
+  children: PropTypes.node,
+};
+
+// definir props padrão
+// Hero.defaultProps = {
+//   title: "Meu título",
+// };
 export default Hero;
